@@ -135,6 +135,21 @@ Production hardening tips:
 - Set `MAY_CONTAINER_NAME` to a unique value per environment (for example `may-prod`, `may-staging`) to avoid container name conflicts when running multiple stacks on the same Docker host.
 - Use a dedicated persistent volume per stack/environment so data is isolated. If you deploy multiple stacks from this same compose file, keep separate stack names (or adjust volume naming) so each stack gets its own `may_data` volume.
 
+Docker Hub env file options:
+
+- Use `stack.dockerhub.env` for production deployments with fixed stable tags (for example `1.0.0`) and default port `5050`.
+- Use `stack.dockerhub.staging.env` for staging/pre-release deployments with RC/dev tags (for example `1.0.0-rc1`) and default port `5051`.
+
+Examples:
+
+```bash
+# Production
+docker compose -f docker-compose-port.yaml --env-file .env --env-file stack.dockerhub.env up -d
+
+# Staging
+docker compose -f docker-compose-port.yaml --env-file .env --env-file stack.dockerhub.staging.env up -d
+```
+
 After deployment, open `http://<your-host>:<MAY_PORT>`.
 
 ### Manual Installation
