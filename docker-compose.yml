@@ -10,14 +10,14 @@ services:
     volumes:
       - may_data:/app/data
     environment:
-      - SECRET_KEY=${SECRET_KEY:-change-me-in-production}
-      - DATABASE_URL=${DATABASE_URL:-sqlite:////app/data/may.db}
+      - SECRET_KEY=${SECRET_KEY}
+      - DATABASE_URL=${DATABASE_URL}
       # PostgreSQL: postgresql+psycopg://may:may@postgres:5432/may
       # MySQL:      mysql+pymysql://may:may@mysql:3306/may
       # MariaDB:    mysql+pymysql://may:may@mariadb:3306/may
       - UPLOAD_FOLDER=/app/data/uploads
       # Optional: set a fixed admin password (default is auto-generated and shown in logs)
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-your-secure-password}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
 
   postgres:
     image: postgres:16-alpine
@@ -26,7 +26,7 @@ services:
     environment:
       - POSTGRES_DB=${POSTGRES_DB:-may}
       - POSTGRES_USER=${POSTGRES_USER:-may}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-may}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       - may_postgres_data:/var/lib/postgresql/data
 
@@ -37,8 +37,8 @@ services:
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE:-may}
       - MYSQL_USER=${MYSQL_USER:-may}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-may}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-may-root}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
       - may_mysql_data:/var/lib/mysql
 
@@ -49,8 +49,8 @@ services:
     environment:
       - MARIADB_DATABASE=${MARIADB_DATABASE:-may}
       - MARIADB_USER=${MARIADB_USER:-may}
-      - MARIADB_PASSWORD=${MARIADB_PASSWORD:-may}
-      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD:-may-root}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
     volumes:
       - may_mariadb_data:/var/lib/mysql
 
